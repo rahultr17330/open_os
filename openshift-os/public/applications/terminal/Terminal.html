@@ -8,8 +8,14 @@
   SOCKET.io
 -->
 <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono" rel="stylesheet">
+<script src="/applications/terminal/editor/lib/codemirror.js"></script>
 <link rel="stylesheet" href="/applications/terminal/style.css">
-
+<link rel="stylesheet" href="/applications/terminal/editor/lib/codemirror.css">
+<link rel="stylesheet" href="/applications/terminal/editor/theme/3024-night.css">
+<script src="/applications/terminal/editor/mode/xml/xml.js"></script>
+<script src="/applications/terminal/editor/mode/javascript/javascript.js"></script>
+<script src="/applications/terminal/editor/mode/css/css.js"></script>
+<script src="/applications/terminal/editor/mode/htmlmixed/htmlmixed.js"></script>
 <div id="terminal_window_small" class="modal" draggable="true" style="background-color:black; backdrop-filter: blur(2px); height: 100%;">
   <div class="navbar-fixed">
     <nav class="toolbar" style="position: fixed;">
@@ -41,10 +47,10 @@
             <div class="dot dot4"></div>
           </center>
         </div>
-        <input value=">$ " id="input_line" type="text" style="border: none; border-bottom:0px; border-radius: 0; outline: 0px; height: 3rem; width: 100%; font-size: 12px; color: #ffffff; font-family: 'IBM Plex Mono', monospace; margin: 0 0 0px 0; padding: 0; border-bottom: none; -webkit-box-shadow:none; box-shadow: none;">
+        <input value=">$ " id="input_line" type="text" style="border: none; border-bottom:0px; border-radius: 0; outline: 0px; height: 3rem; width: 100%; font-size: 12px; color: #ffffff; font-family: 'IBM Plex Mono', monospace; margin: 0 0 0px 0; padding: 0; border-bottom: none; -webkit-box-shadow:none; box-shadow: none; display: inline;">
       </div>
     </div>
-
+ <div id="editor-area" style="display: none;"></div>
   </div>
 </div>
 
@@ -80,10 +86,15 @@
           <div class="dot dot4"></div>
         </center>
       </div>
-      <input value=">$ " id="input_line_big" type="text" style="border: none; border-bottom:0px; border-radius: 0; outline: 0px; height: 3rem; width: 100%; font-size: 12px; color: #ffffff; font-family: 'IBM Plex Mono', monospace; margin: 0 0 0px 0; padding: 0; border-bottom: none; -webkit-box-shadow:none; box-shadow: none;\">
+      <div class="col s12">
+     
+      <div style="display: inline;"> <input value=">$ "  id="input_line_big" type="text" style="border: none; border-bottom:0px; border-radius: 0; outline: 0px; height: 3rem; width: 100%; font-size: 12px; color: #ffffff; font-family: 'IBM Plex Mono', monospace; margin: 0 0 0px 0; padding: 0; border-bottom: none; -webkit-box-shadow:none; box-shadow: none;\">
     </div>
   </div>
+  </div>
 
+  </div>
+<div id="editor-area-big" style="display: none;"></div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script src="/applications/terminal/client_js.js"></script>

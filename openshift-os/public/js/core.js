@@ -22,7 +22,7 @@ var k =0 ;
 $(".Dock").append('<div class="Icon app" id="' + apps[i]
           .name + '" path="' + apps[i].entry_file + '"><img src ="' + apps[i].icon +
           '" style="height:45px; width:45px; margin-left:10px;"></div)');
-        $("#row_" + row).append('<div draggable="true"  style="color:white;" class="col s12 m2 app"  id="' + apps[i]
+      $("#row_" + row).append('<div draggable="true"  style="color:white;" class="col s12 m2 app"  id="' + apps[i]
           .name + '" path="' + apps[i].entry_file + '"><img src ="' + apps[i].icon +
           '" style="height:54px; width:54px; margin-left:10px;"><br><a style="color:white;  margin-left:12px;">' +
           apps[i].name + '</a></div>');

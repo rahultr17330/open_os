@@ -3,6 +3,8 @@ var socket = require('socket.io');
 var shell = require('shelljs')
 var pty = require('node-pty');
 var ansi2html = require('ansi2html');
+const fs = require('fs');
+const path = require('path');
 /* 
 app parameter holds two objects ::
 	express : it is the express app running on default port
@@ -41,6 +43,42 @@ app.io.on('connection', function (socket) {
 
 
   });
+  socket.on('edit_file', function (filedata) {
+       var file = path.resolve(__dirname,filedata.name);
+
+   /*  if (fs.existsSync( './'+filedata.name))
+    {*/
+         fs.writeFile(file,filedata.fdata, 'utf-8', function (err) {
+      if (err) {
+          socket.emit('edit_file_response_'+filedata.name+filedata.id,"Failed To Save");
+      } else {
+         socket.emit('edit_file_response_'+filedata.name+filedata.id,"File Saved");
+      }
+    });
+         /*
+}else{
+    socket.emit('edit_file_response_'+filedata.name+filedata.id,"File Not Found");
+}*/
+});
+socket.on('view_file', function (filedata) {
+     var file = path.resolve(__dirname,filedata.name);
+   console.log(file);
+  /*       if (fs.existsSync( './'+filedata.name ))
+    { */
+
+         fs.readFile(filedata.name,'Utf-8',function (err,data) {
+        
+      if (err) {
+        socket.emit('view_file_response_'+filedata.name+filedata.id,"Failed To Open File");
+      } else {
+
+     socket.emit('view_file_response_'+filedata.name+filedata.id,data);
+      }
+    });
+/*}else{
+  socket.emit('view_file_response_'+filedata.name+filedata.id,"File Not Found");
+}*/
+});
   term.on('data', function (data) {
     console.log(logs[term.pid]);
     logs[term.pid] = data.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '');
